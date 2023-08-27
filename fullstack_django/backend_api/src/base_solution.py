@@ -162,7 +162,7 @@ def find_address(adr):
                 if dist > mindist:
                     str_name_set = str_name_set - {str_name}
         for str_name in str_name_set:
-            for idx in adr_idx_by_street[str_name]:
+            for idx in adr_idx_by_streets[str_name]:
                 good_adr_comp1.append(parse_good_adr[idx])
 
     if len(good_adr_comp1) == 1:

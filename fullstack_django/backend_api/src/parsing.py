@@ -45,7 +45,7 @@ def parsing(good_addresses, id):
     good_addresses = list(good_addresses)
     id = list(id)
     for i in range(len(good_addresses)):
-        adr1 = good_addresses[i].lower().split(", ")
+        adr1 = str(good_addresses[i]).lower().split(", ")
         adr = adr1.copy()
         tmp_town = "undefined"
         tmp_subtown = "undefined"

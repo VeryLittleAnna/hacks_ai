@@ -1,0 +1,2 @@
+fullstack_django/backend_api/src/parse_good_adr.json filter=lfs diff=lfs merge=lfs -text
+*.json filter=lfs diff=lfs merge=lfs -text

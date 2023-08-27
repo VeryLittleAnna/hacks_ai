@@ -1,0 +1,20 @@
+.MyDiv {
+    position: absolute;
+    width: 815px;
+    height: 550px;
+    top: 40%;
+    left: 34.7%;
+    margin: -125px 0 0 -125px;
+    border-radius: 15px;
+    display: flex; /* Используем flex-контейнер */
+    justify-content: center; /*Выравнивание по горизонтали*/
+    align-items: center; /*Выравнивание по вертикали */
+    flex-direction: center;
+    border: 8px solid #11A65F;
+
+}
+
+.t117_map{
+    border-radius: 15px;
+    overflow: hidden;
+}

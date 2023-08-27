@@ -1,0 +1,6 @@
+.MyBackground {
+    background-image: url('fon.png');
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

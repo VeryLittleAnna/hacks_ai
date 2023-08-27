@@ -1,0 +1,169 @@
+.MyDiv {
+    position: absolute;
+    left: 14%;
+    top: 10%;
+    /* bottom: 60%; */
+    width: 60%; /* Измените ширину по своему усмотрению */
+    /* background-color: #B0E0E6; Цвет квадрата */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex; /* Используем flex-контейнер */
+    justify-content: center; /* Выравнивание по горизонтали */
+    align-items: center; /* Выравнивание по вертикали */
+    flex-direction: column;
+
+}
+.MyInput {
+    position: relative;
+    display: inline-block;
+    width: 60%;
+    padding: 10px;
+    border: 2px solid #11A65F;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(17, 166, 95, 0.5);
+    font-family: Arial;
+    background-color:whitesmoke;
+    outline: none; /* Убираем выделение при клике */
+}
+
+.MyInput:focus {
+  border-color: #11A65F; /* Любой цвет, который вы хотите для подсветки при фокусе */
+  box-shadow: 0 0 5px rgba(17, 166, 95, 0.5); /* Тень для более яркого эффекта */
+}
+
+.MyBtn {
+    display: inline-block;
+    position: relative;
+    top: -116px; 
+    left: 330px;
+    padding: 12px 21px;
+    background-color: #11A65F;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial;
+    font-weight: 700;
+}
+
+.MyLogo {
+    position: relative;
+    width: 300px; /* Ширина */
+    height: 90px;
+    float: left;
+    left: 20px;   
+    font-family: Arial;
+    color: #11A65F; 
+    /* font-weight: 100; 
+    /* font-size: 1em; */
+}
+
+.ClearBtn {
+  position: relative;
+  display: inline-block;
+  left: 58%;
+  top: -174px;
+  background-color: #FF0000; /* Red color for the button */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  padding: 12px 21px; /* Add padding to the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  border-radius: 10px; /* Add rounded corners */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s ease; /* Add transition effect to background color */
+  margin-top: 10px; /* Add margin at the top to separate from other elements */
+}
+
+.ClearBtn:hover {
+  background-color: #dc1709; /* Darker shade of blue on hover */
+}
+
+.dowloadInp {
+  position: relative;
+  top: 5px;
+  left: -171px;
+}
+
+.dowloadRef {
+  position: relative;
+  top: -29px;
+  left: -2px;
+}
+
+.uploadRefLabel {
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  background-color: #205cdd;
+  border-radius: 10px;
+  padding: 5px 15px;
+  transition: background-color 0.3s ease;
+}
+
+
+.uploadLabel {
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  background-color: #11A65F;
+  border-radius: 10px;
+  padding: 5px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.uploadMessage {
+  position: absolute;
+  color: #19c913; /* Green color for success message */
+  font-family: Arial;
+  padding: 5px;
+  width: 30%;
+  left: 29%;
+  top: 20px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid #24cf1e;
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeOut 8s forwards;
+}
+
+.MyMessage {
+  position: absolute;
+  font-family: Arial;
+  width: 30%;
+  left: 29%;
+  top: 30px;
+  text-align: center;
+}
+
+.MyErrorMessage {
+  position: absolute;
+  font-family: Arial;
+  border: 2px solid #D83B3B;
+  padding: 5px;
+  width: 30%;
+  left: 29%;
+  top: 30px;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #D83B3B;
+  background-color:whitesmoke;
+  animation: fadeOut 8s forwards;
+}
+
+@keyframes fadeOut {
+    from {
+      opacity: 1; /* Начальная прозрачность */
+    }
+    to {
+      opacity: 0; /* Конечная прозрачность */
+    }
+  }

@@ -1,6 +1,7 @@
 import Levenshtein
 import re
 import json
+import pickle
 
 all_types = {"ул.": "улица", "у.": "улица", "улица": "улица", "ул": "улица", "у": "улица",
                 "шоссе":"шоссе", "ш.":"шоссе", "ш":"шоссе",
@@ -49,19 +50,14 @@ corp_names = {"корпус":"корпус", "корп.":"корпус", "кор
 build_names = {"строение":"строение", "стр.":"строение", "стр":"строение"}
 liter = {"литера":"литера"}
 
-with open("./fullstack_django/backend_api/src/adr_idx_by_street.json", "r", encoding="utf-8") as file:
-    adr_idx_by_street = json.load(file)
-adr_idx_by_street = adr_idx_by_street
+with open("./fullstack_django/backend_api/src/parse_good_adr.bin", "rb") as f:
+    parse_good_adr = pickle.load(f)
 
-with open("./fullstack_django/backend_api/src/parse_good_adr.json", "r", encoding="utf-8") as file:
-    parse_good_adr = json.load(file)
-parse_good_adr = eval(parse_good_adr)
+with open("./fullstack_django/backend_api/src/adr_idx_by_streets.bin", "rb") as f:
+    adr_idx_by_streets = pickle.load(f)
 
-with open("./fullstack_django/backend_api/src/types_by_streets.json", "r", encoding="utf-8") as file:
-    types_by_streets = json.load(file)
-types_by_street = eval(types_by_streets)
-
-
+with open("./fullstack_django/backend_api/src/types_by_streets.bin", "rb") as f:
+    types_by_street = pickle.load(f)
 def expand_reduction(address):
     translation_table = str.maketrans("ё().", "е   ")
     tmp_adr = address.translate(translation_table).replace(",", " , ")

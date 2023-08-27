@@ -1,46 +1,49 @@
 import re
 import json
+import pickle
 
 street_types0 = {"ул.": "улица", "у.": "улица", "улица": "улица", "ул": "улица", "у": "улица"}
 street_types = {"ул.": "улица", "у.": "улица", "улица": "улица", "ул": "улица", "у": "улица",
-                "шоссе":"шоссе", "ш.":"шоссе", "ш":"шоссе",
-                "переулок":"переулок", "пер.":"переулок", "пер":"переулок",
-                "проезд": "проезд", 
-                "проспект":"проспект", "просп.":"проспект", "пр-кт":"проспект", "просп":"проспект",
-                "набережная":"набережная", "наб.":"набережная", "наб":"набережная", 
-                "площадь":"площадь", "пл.":"площадь", "пл":"площадь", 
-                "бул.":"бульвар", "бул":"бульвар", "б-р":"бульвар", "бульвар":"бульвар", "бульв.":"бульвар",
-                "аллея":"аллея", "ал.":"аллея", "ал":"аллея", 
-                "парк":"парк", "км":"км", "слобода":"слобода",
-                "вал":"вал", "гавань":"гавань", "линия":"линия",
-                "коса":"коса", "канал":"канал", "кольцо":"кольцо", "спуск":"спуск",
-                "дорога":"дорога", "дорожка":"дорожка", "дор.":"дорога",
-                "тупик":"тупик", "остров":"остров", "переезд":"переезд"}
+                "шоссе": "шоссе", "ш.": "шоссе", "ш": "шоссе",
+                "переулок": "переулок", "пер.": "переулок", "пер": "переулок",
+                "проезд": "проезд",
+                "проспект": "проспект", "просп.": "проспект", "пр-кт": "проспект", "просп": "проспект",
+                "набережная": "набережная", "наб.": "набережная", "наб": "набережная",
+                "площадь": "площадь", "пл.": "площадь", "пл": "площадь",
+                "бул.": "бульвар", "бул": "бульвар", "б-р": "бульвар", "бульвар": "бульвар", "бульв.": "бульвар",
+                "аллея": "аллея", "ал.": "аллея", "ал": "аллея",
+                "парк": "парк", "км": "км", "слобода": "слобода",
+                "вал": "вал", "гавань": "гавань", "линия": "линия",
+                "коса": "коса", "канал": "канал", "кольцо": "кольцо", "спуск": "спуск",
+                "дорога": "дорога", "дорожка": "дорожка", "дор.": "дорога",
+                "тупик": "тупик", "остров": "остров", "переезд": "переезд"}
 
-towns_type = {"поселок":"поселок", "посёлок":"поселок", 
-"город":"город", "г.":"город", "г":"город"}
+towns_type = {"поселок": "поселок", "посёлок": "поселок",
+              "город": "город", "г.": "город", "г": "город"}
 
 city_names = {"спб", "санкт", "петербург", "питер", "санкт-петербург", "г.санкт-петербург"}
 
-house_names = {"дом":"дом", "д":"дом", "д.":"дом"}
-corp_names = {"корпус":"корпус", "корп.":"корпус", "корп":"корпус", "к.":"корпус", "к":"корпус"}
-build_names = {"строение":"строение", "стр.":"строение", "стр":"строение"}
-liter = {"литера":"литера"}
+house_names = {"дом": "дом", "д": "дом", "д.": "дом"}
+corp_names = {"корпус": "корпус", "корп.": "корпус", "корп": "корпус", "к.": "корпус", "к": "корпус"}
+build_names = {"строение": "строение", "стр.": "строение", "стр": "строение"}
+liter = {"литера": "литера"}
 
-with open("./fullstack_django/backend_api/src/parse_good_adr.json", "r", encoding="utf-8") as file:
-    parse_good_adr = json.load(file)
-parse_good_adr = eval(parse_good_adr)
+with open("./fullstack_django/backend_api/src/parse_good_adr.bin", "rb") as f:
+    parse_good_adr = pickle.load(f)
 
-types_by_towns = dict()
-with open("./fullstack_django/backend_api/src/types_by_towns.json", "r", encoding="utf-8") as file:
-    types_by_towns = json.load(file)
+with open("./fullstack_django/backend_api/src/adr_idx_by_streets.bin", "rb") as f:
+    adr_idx_by_streets = pickle.load(f)
+
+with open("./fullstack_django/backend_api/src/types_by_streets.bin", "rb") as f:
+    types_by_streets = pickle.load(f)
+
+with open("./fullstack_django/backend_api/src/types_by_towns.bin", "rb") as f:
+    types_by_towns = pickle.load(f)
+
 
 def parsing(good_addresses, id):
     good_addresses = list(good_addresses)
     id = list(id)
-    parse_good_adr = []
-    adr_idx_by_street = dict()
-    types_by_street = dict()
     for i in range(len(good_addresses)):
         adr1 = good_addresses[i].lower().split(", ")
         adr = adr1.copy()
@@ -65,7 +68,6 @@ def parsing(good_addresses, id):
             words0 = part.split(" ")
             short_name.extend(words0)
             words = words0
-            tmp_type_town = "undefined"
             for w in words:
                 if not town_find and w in towns_type.keys():
                     words.remove(w)
@@ -87,12 +89,12 @@ def parsing(good_addresses, id):
                     if tmp_street in street_types0.keys():
                         words.append(w)
                         continue
-                    if tmp_street in types_by_street.keys():
-                        types_by_street[tmp_street].update({tmp_street_type})
-                        adr_idx_by_street[tmp_street].append(i)
+                    if tmp_street in types_by_streets.keys():
+                        types_by_streets[tmp_street].update({tmp_street_type})
+                        adr_idx_by_streets[tmp_street].append(i)
                     else:
-                        types_by_street[tmp_street] = {tmp_street_type}
-                        adr_idx_by_street[tmp_street] = [i]
+                        types_by_streets[tmp_street] = {tmp_street_type}
+                        adr_idx_by_streets[tmp_street] = [i]
                     adr.remove(part)
                     street_find = True
                     break
@@ -131,16 +133,18 @@ def parsing(good_addresses, id):
                 tmp_subtown = part
                 if part in adr:
                     adr.remove(part)
-        
 
-        parse_good_adr.append(dict({"town":tmp_town, "subtown":tmp_subtown,
-        "street":tmp_street, "street_type":tmp_street_type, "house":tmp_house,
-        "corp":tmp_corp, "build":tmp_build, "liter":tmp_liter, "full_name":good_addresses[i], 
-        "short_name": set(short_name), "target_building_id":id[i]}))
+        parse_good_adr.append(dict({"town": tmp_town, "subtown": tmp_subtown,
+                                    "street": tmp_street, "street_type": tmp_street_type, "house": tmp_house,
+                                    "corp": tmp_corp, "build": tmp_build, "liter": tmp_liter,
+                                    "full_name": good_addresses[i],
+                                    "short_name": set(short_name), "target_building_id": id[i]}))
 
-    json_data = json.dumps(str(parse_good_adr))
-    with open("./fullstack_django/backend_api/src/parse_good_adr.json", "w") as file:
-        file.write(json_data)
-    json_data = json.dumps(types_by_towns)
-    with open("./fullstack_django/backend_api/src/types_by_towns.json", "w") as file:
-        file.write(json_data)
+    with open("./fullstack_django/backend_api/src/parse_good_adr.bin", "wb") as f:
+        pickle.dump(parse_good_adr, f)
+    with open("./fullstack_django/backend_api/src/types_by_towns.bin", "wb") as f:
+        pickle.dump(types_by_towns, f)
+    with open("./fullstack_django/backend_api/src/adr_idx_by_streets.bin", "wb") as f:
+        pickle.dump(adr_idx_by_streets, f)
+    with open("./fullstack_django/backend_api/src/types_by_streets.bin", "wb") as f:
+        pickle.dump(types_by_streets, f)

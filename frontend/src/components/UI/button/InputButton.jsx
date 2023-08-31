@@ -18,7 +18,7 @@ function InputButton(props) {
 
   useEffect(() => {
     // Исчезновение всплывающего сообщения через 10 секунд
-    if (showUploadMessage) {
+    if (showAnswersReadyMessage) {
       const timeoutId = setTimeout(() => {
         setShowAnswersReadyMessage(false);
       }, 10000);
@@ -83,7 +83,7 @@ function InputButton(props) {
         setAddress('');
       }
       const response = await axios.post('http://localhost:8000/api/get_coordinates/', formData);
-
+      console.log(response.data.success, response.data.target_address, response.data.message_file);
       if (response.data.success) {
         if (response.data.message_file) {
           console.log("Ответы записаны в лог!");

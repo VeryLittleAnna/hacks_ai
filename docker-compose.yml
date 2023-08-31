@@ -1,20 +1,24 @@
-# Run command: docker-compose up -d
+# Build project: docker-compose build
+# Run command: docker-compose up
 
-version: '3'
+version: '3.7'
 
 services:
   backend:
     build:
       context: ./fullstack_django
-    ports:
-      - "8000:8000"
+      dockerfile: Dockerfile
+    command: python3 /hacks_ai/fullstack_django/manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
-
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - .:/code
+      - .:/hacks_ai
+    ports:
+      - 8000:8000
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: npm start --prefix /hacks_ai/frontend
+    volumes:
+      - .:/hacks_ai
+    ports:
+      - 3000:3000

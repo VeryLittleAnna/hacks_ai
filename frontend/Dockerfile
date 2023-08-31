@@ -1,13 +1,13 @@
-FROM node:14
+FROM node:20.5.1
 
-WORKDIR /app
+WORKDIR /hacks_ai
 
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH /hacks_ai/frontend/node_modules/.bin:$PATH
 
-COPY ./package.json /app/package.json
+COPY package.json /tmp/package.json
 
-RUN npm install
+# RUN npm install 
 
-COPY . /app
+COPY . /hacks_ai
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]

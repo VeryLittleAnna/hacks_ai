@@ -1,11 +1,13 @@
 FROM node:14
 
-WORKDIR /frontend
+WORKDIR /app
 
-COPY package.json package-lock.json /frontend/
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY ./package.json /app/package.json
 
 RUN npm install
 
-COPY . /frontend/
+COPY . /app
 
 CMD ["npm", "start"]

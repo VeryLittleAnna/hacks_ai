@@ -1,24 +1,20 @@
+# Run command: docker-compose up -d
+
 version: '3'
 
 services:
   backend:
     build:
       context: ./fullstack_django
-      dockerfile: Dockerfile
-    volumes:
-      - ./fullstack_django:/fullstack_django
     ports:
       - "8000:8000"
-    command: python3 fullstack_django/manage.py runserver
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
     volumes:
-      - ./frontend:/frontend
-    ports:
-      - "3000:3000"
-    command: npm start --prefix frontend
-    depends_on:
-      - backend
+      - .:/code
+
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/code

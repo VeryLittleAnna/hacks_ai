@@ -5,9 +5,21 @@
 
 ![](Scheme.png)
 
-### Запуск проекта:
-1. В папке ***hacks_ai*** необходимо создать среду через команду: ***python3 -m venv myenv***
-2. Переход в окружение: ***source myenv/bin/activate***
-3. Запуск всего веб приложения осуществляется через Docker (необходимо установить) следующим образом:
-   - Сборка контейнера: ***docker-compose build***
-   - Запуск контейнера: ***docker-compose up***
+### Запуск проекта (Linux):
+1. Клонировать проект в выбранную дерикторию:
+   ```bash 
+      git clone https://github.com/VeryLittleAnna/hacks_ai.git
+   ```
+2. В папке ***hacks_ai*** необходимо создать среду через команду:
+   ```bash
+      python3 -m venv myenv
+   ```
+3. Переход в окружение:
+   ```bash
+      source myenv/bin/activate
+   ```
+4. Запуск всего веб приложения осуществляется через Docker (необходимо установить) следующим образом:
+   ```bash
+      docker-compose build
+      docker-compose up
+   ```

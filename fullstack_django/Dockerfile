@@ -1,6 +1,3 @@
-# Build docker image: docker build -t hacks_ai .
-# Run docker image: docker run --name webapp hacks_ai
-# после name указываем имя контейнера, а потом образа
 FROM python:3.10-slim-buster
 
 ENV PYTHONDONTWRITEBYTECODE 1

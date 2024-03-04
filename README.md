@@ -1,24 +1,24 @@
-### Задача:
-Участникам хакатона при помощи методов искусственного интеллекта и данных, включающих полные адреса домов и зданий г. Санкт-Петербурга, предстоит построить модель, которая сможет адаптироваться к задачам определения корректного адреса, содержащегося в исходной базе данных.
+### Problem:
+Hackathon participants, using artificial intelligence methods and data including full addresses of houses and buildings in St. Petersburg, will have to build a model that can adapt to the tasks of determining the correct address contained in the source database.
 
-### Предлагаемое решение:
+### Solution architecture:
 
 ![](Scheme.png)
 
-### Запуск проекта (Linux):
-1. Клонировать проект в выбранную дерикторию:
-   ```bash 
+### Starting the project (Linux):
+1. Clone the project into the selected directory:
+   ```bash
       git clone https://github.com/VeryLittleAnna/hacks_ai.git
    ```
-2. В папке ***hacks_ai*** необходимо создать среду через команду:
+2. In the ***hacks_ai*** folder you need to create an environment using the command:
    ```bash
       python3 -m venv myenv
    ```
-3. Переход в окружение:
+3. Transition to the environment:
    ```bash
       source myenv/bin/activate
    ```
-4. Запуск всего веб приложения осуществляется через Docker (необходимо установить) следующим образом:
+4. The entire web application is launched via Docker (must be installed) as follows:
    ```bash
       docker-compose build
       docker-compose up
